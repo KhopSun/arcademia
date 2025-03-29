@@ -1,5 +1,6 @@
 import React from 'react';
-  import BottomNavBar from '@/app/components/BottomNavBar'; 
+import BottomNavBar from '@/app/components/BottomNavBar'; 
+
 
   export default function MainLayout({
     children,
