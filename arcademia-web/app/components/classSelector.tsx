@@ -37,7 +37,7 @@ export default function ClassSelect({ onNext }: ClassSelectProps) {
           <div
             key={cls.name}
             onClick={() => setSelected(cls.name as UserClass)}
-            className={`flex flex-col items-center bg-white p-3 shadow-md cursor-pointer rounded-lg transition-transform duration-200 ${
+            className={`nes-container is-rounded flex flex-col items-center bg-white p-3 shadow-md cursor-pointer  transition-transform duration-200 ${
               selected === cls.name
                 ? "scale-110 border-4 border-[#47423F] z-20"
                 : "hover:scale-105 opacity-80"

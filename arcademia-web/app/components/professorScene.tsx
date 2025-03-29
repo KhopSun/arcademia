@@ -36,7 +36,7 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
               alt="Professor"
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
               className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-104"
             />
 
@@ -44,8 +44,9 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  Long ago, I was the guardian of Numeria—where math shaped
-                  magic and logic held the world in perfect balance
+                  <strong>Archsage Calculo: </strong>Long ago, I was the
+                  guardian of Numeria—where math shaped magic and logic held the
+                  world in perfect balance
                   <br />
                   <br />
                   But then came Oblivor, the Lord of Unlearning. With one cursed
@@ -93,8 +94,9 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  I fought to protect <strong>Numeria…</strong> but even I could
-                  not resist the Great Forgetting.
+                  <strong>Archsage Calculo: </strong>I fought to protect{" "}
+                  <strong>Numeria…</strong> but even I could not resist the
+                  Great Forgetting.
                   <br />
                   <br />
                   Archsage Calculo, guardian of math, was sealed deep within the
@@ -138,7 +140,8 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  Now, from within his crystal prison,{" "}
+                  <strong>Archsage Calculo: </strong>Now, from within his
+                  crystal prison,{" "}
                   <strong>
                     Calculio sends out a projection— one last chance to teach
                   </strong>

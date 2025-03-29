@@ -78,7 +78,7 @@ source of all learning."
       {step === 2 && (
         <>
           <motion.img
-            src="/assets/background/four_cities_boom.png"
+            src="/assets/background/four_cities_destroyed.png"
             alt="Cracked"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
