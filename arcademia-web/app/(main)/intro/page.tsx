@@ -49,7 +49,7 @@ export default function Home() {
     // </div>
     <div className="flex items-center justify-center h-screen bg-[#EBDEC0] text-black">
       <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#47423F]"></div>
-      <span className="ml-4 text-xl">Loading next stage...</span>
+      <span className="ml-4 text-xl w-8/10">Loading next stage...</span>
     </div>
   );
 }
