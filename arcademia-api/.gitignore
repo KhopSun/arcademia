@@ -1,0 +1,32 @@
+
+# Dependency directories
+/node_modules
+
+# Build output
+/dist
+
+# Environment variables
+*.env
+
+#drizzle
+/drizzle
+
+# IDE files
+.vscode
+.idea
+
+# Logs
+/logs
+
+# Testing artifacts
+/coverage
+
+# Compiled JavaScript files
+*.js
+
+# TypeScript declaration files
+# *.d.ts
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
