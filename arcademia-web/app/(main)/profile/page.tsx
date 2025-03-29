@@ -9,6 +9,7 @@ import mathIcon from "@/public/assets/skillTreeElements/math_element.png";
 import scienceIcon from "@/public/assets/skillTreeElements/science_element.png";
 import languageIcon from "@/public/assets/skillTreeElements/english_element.png";
 import maleChar from "@/public/assets/main_char/steve.png";
+import femaleChar from "@/public/assets/main_char/girl_steve.png";
 import Image from "next/image";
 import maleMathClass from "@/public/assets/class/characters/math/male_math.png";
 import maleScienceClass from "@/public/assets/class/characters/science/male_science.png";
@@ -20,7 +21,7 @@ import femaleEnglishClass from "@/public/assets/class/characters/english/female_
 import femaleCodeClass from "@/public/assets/class/characters/code/female_code.png";
 
 const ProfilePage: React.FC = () => {
-  const { name, coins, items, gender, stats } = useUser(); // Assuming 'gender' is available in user context
+  const { name, coins, items, gender, stats, exp } = useUser(); // Assuming 'gender' is available in user context
   const [showInventory, setShowInventory] = useState(false);
   const [showClassDescription, setShowClassDescription] = useState(false);
   const [showSkillsModal, setShowSkillsModal] = useState(false);
@@ -137,7 +138,7 @@ if (isAllZero) {
         className="flex-col nes-container gap-4 flex items-center justify-center w-full p-9 bg-center bg-fill h-[390px]"
         style={{ backgroundImage: `url(${profileBg.src})` }}
       >
-        <Image alt="male" src={maleChar} width={200} height={200} />
+        <Image alt="male" src={gender=='male'? maleChar: femaleChar} width={200} height={200} />
         <div className="nes-container is-rounded px-4 py-2">
           <span className="text-2xl">{name}</span>
         </div>
@@ -146,7 +147,7 @@ if (isAllZero) {
           <progress
             className="nes-progress is-success"
             style={{ height: "15px" }}
-            value={500}
+            value={exp}
             max={1000}
           ></progress>
         </div>

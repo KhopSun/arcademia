@@ -15,12 +15,14 @@ type userContext = {
   coins: number;
   items: Item[];
   stats: Stats;
+  exp: number;
   setGender: (gender: Gender) => void;
   setName: (name: string) => void;
   setUserClass: (userClass: UserClass) => void;
   setCoins: (coins: number) => void;
   setItems: (items: Item[]) => void;
   setStats: (stats: Stats) => void;
+  setExp: (exp: number) => void;
 };
 
 const UserContext = createContext<userContext | undefined>(undefined);
@@ -32,10 +34,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [coins, setCoins] = useState<number>(100);
   const [items, setItems] = useState<Item[]>([]);
   const [stats, setStats] = useState<Stats>({ science: 0, code: 0, math: 0, english: 0 });
-
+  const [exp, setExp] = useState<number>(0);
   return (
     <UserContext.Provider
-      value={{ gender, setGender, name, setName, userClass, setUserClass, coins, setCoins, items, setItems, stats, setStats }}
+      value={{ gender, setGender, name, setName, userClass, setUserClass, coins, setCoins, items, setItems, stats, setStats, exp, setExp }}
     >
       {children}
     </UserContext.Provider>
