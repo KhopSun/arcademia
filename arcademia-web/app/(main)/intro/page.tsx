@@ -47,8 +47,8 @@ export default function Home() {
     //   <br />
     //   {/* TODO: Render your next game component here */}
     // </div>
-    <div className="flex items-center justify-center h-screen bg-white text-black">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+    <div className="flex items-center justify-center h-screen bg-[#EBDEC0] text-black">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#47423F]"></div>
       <span className="ml-4 text-xl">Loading next stage...</span>
     </div>
   );
