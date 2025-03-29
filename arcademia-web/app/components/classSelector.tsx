@@ -29,7 +29,7 @@ export default function ClassSelect({ onNext }: ClassSelectProps) {
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center bg-[#EBDEC0] gap-6 px-4">
       <h1 className="text-2xl font-bold mb-4 text-center text-[#47423F]">
-        Choose Your Class
+        Choose What You Want To Learn
       </h1>
 
       <div className="grid grid-cols-2 gap-[5px]">
