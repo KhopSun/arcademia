@@ -43,7 +43,7 @@ const ShopPage: React.FC = () => {
         style={{ backgroundImage: `url(${woodBg.src})` }}
       >
         <h1 className="text-3xl font-bold">Welcome to the Shop!</h1>
-        <div className="grid grid-cols-2 gap-6 mt-4">
+        <div className="grid grid-cols-2 gap-4 mt-4">
           {shopItems.map((item, index) => (
             <div key={index} className="bg-stone-800 nes-container p-4 is-dark is-rounded shadow-lg flex flex-col items-center">
               <Image src={item.icon} alt={item.name} width={80} height={80} />
@@ -51,8 +51,8 @@ const ShopPage: React.FC = () => {
                 <h2 className="text-lg mt-2">{item.name}</h2>
                 <p className="text-xs text-gray-300">{item.description}</p>
               </div>
-              <button className="mt-2 nes-btn is-warning" onClick={() => buyItem(item)}>
-                {item.price} gold
+              <button className="mt-2 nes-btn text-sm flex flex-row is-warning" onClick={() => buyItem(item)}>
+                {item.price}<i className='nes-icon coin is-small'/>
               </button>
             </div>
           ))}

@@ -26,9 +26,9 @@ const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
   };
 
   const getIcon = () => {
-    if (lesson.status === 'locked') return <FaLock className="w-5 h-5" />;
-    if (lesson.status === 'completed') return <FaCheck className="w-5 h-5" />;
-    if (lesson.status === 'current') return <FaStar className="w-5 h-5" />;
+    if (lesson.status === 'locked') return <i className="nes-icon close is-medium w-5 h-5" />;
+    if (lesson.status === 'completed') return <i className="nes-icon star is-medium w-5 h-5" />;
+    if (lesson.status === 'current') return <i className="w-5 h-5 nes-icon star is-medium is-transparent" />;
 
     switch (lesson.type) {
       case 'lesson':

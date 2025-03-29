@@ -30,6 +30,7 @@ export default function Login() {
       bg-[url('/wood-texture.png')] 
       bg-repeat 
       p-4
+      gap-4
     ">
       {/* Outer card or panel */}
       <div className="
@@ -43,6 +44,7 @@ export default function Login() {
         p-6 
         flex flex-col 
         items-center
+        gap-4
       ">
         {/* Icon / Brand */}
         <div className="
@@ -55,14 +57,14 @@ export default function Login() {
         ">
           <FiBookOpen className="text-4xl text-[#f1c40f]" />
         </div>
-
+        <div className='items-center flex flex-col'>
         <h1 className="mt-4 text-3xl font-bold text-[#5d3a1d]">
           Arcademia
         </h1>
-        <p className="text-[#5d3a1d]">Let's learn</p>
-
+        <span className="text-[#5d3a1d]">Let's learn</span>
+        </div>
         {/* Login Section */}
-        <div className="flex flex-col items-center space-y-4 mt-6 w-full">
+        <div className="flex flex-col items-center space-y-4 w-full">
           <button
             onClick={handleGoogleSignIn}
             className="
@@ -76,14 +78,15 @@ export default function Login() {
               rounded-lg 
               hover:bg-[#ecc489] 
               transition
+              my-4
             "
           >
-            <IoLogoGoogle className="mr-2 text-xl text-[#5d3a1d]" />
+            <IoLogoGoogle size={32} className="mr-2 text-xl text-[#5d3a1d]" />
             <span className="text-sm font-medium text-[#5d3a1d]">
               Continue with Google
             </span>
           </button>
-          <p className="text-xs text-center text-[#5d3a1d]">
+          <p className="text-xs mt-2 text-center text-[#5d3a1d]">
             By continuing, you agree to our{' '}
             <a href="/terms" className="underline">
               Terms

@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 type FightAdditionProps = {
   question: string;
@@ -19,7 +19,7 @@ export default function FightAddition({
   hearts,
   setHearts,
 }: FightAdditionProps) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
@@ -31,7 +31,7 @@ export default function FightAddition({
 
   const handleClear = () => {
     if (!isCorrect && !gameOver) {
-      setInput('');
+      setInput("");
     }
   };
 
@@ -42,7 +42,7 @@ export default function FightAddition({
     } else {
       const remaining = hearts - 1;
       setHearts(remaining);
-      setInput('');
+      setInput("");
       if (remaining <= 0) {
         setGameOver(true);
       }
@@ -50,11 +50,13 @@ export default function FightAddition({
   };
 
   const renderHearts = () => (
-    <div className="flex space-x-3 mb-2 mt-1">
+    <div className="flex absolute right-15 space-x-3 mb-2 mt-1">
       {Array.from({ length: 3 }).map((_, i) => (
         <i
           key={i}
-          className={`nes-icon is-medium ${i < hearts ? 'heart' : 'heart is-empty'}`}
+          className={`nes-icon is-medium ${
+            i < hearts ? "heart" : "heart is-empty"
+          }`}
         ></i>
       ))}
     </div>
@@ -65,7 +67,7 @@ export default function FightAddition({
       className="min-h-screen flex flex-col items-center justify-start bg-no-repeat bg-center bg-cover p-6"
       style={{
         backgroundImage: "url('/assets/background/fight/Autumn2.png')",
-        backgroundSize: '250% 175%',
+        backgroundSize: "250% 175%",
       }}
     >
       {/* 🟡 Top Status */}
@@ -76,26 +78,23 @@ export default function FightAddition({
           </p>
         )}
         {gameOver && (
-          <p className="text-red-400 font-bold text-xl">
-            💀 Game Over 💀
-          </p>
+          <p className="text-red-400 font-bold text-xl">💀 Game Over 💀</p>
         )}
+      </div>
+      {renderHearts()}
+      {/* ❓ Question + ❤️ Hearts */}
+      <div className="bg-[#e5d9c4] nes-container is-rounded  px-4 py-0 shadow-md max-w-md text-center">
+        <span className="text-black font-bold text-2xl leading-none inline-block mt-2 mb-2">
+          {question}
+        </span>
       </div>
 
       {/* 👾 Monster */}
       <img
         src={monsterImgSrc}
         alt="monster"
-        className="w-32 h-32 object-contain mb-2"
+        className="w-64 h-64 object-contain mb-2"
       />
-
-      {/* ❓ Question + ❤️ Hearts */}
-      <div className="bg-[#e5d9c4] border-4 border-black rounded-xl px-4 py-0 shadow-md max-w-md text-center">
-        <span className="text-black font-bold text-lg leading-none inline-block mt-2 mb-2">
-          {question}
-        </span>
-      </div>
-      {renderHearts()}
 
       {/* 📦 Battle Box UI */}
       <div className="bg-[#e5d9c4] border-4 border-[#000000] rounded-xl p-4 shadow-xl w-full max-w-md">
@@ -122,7 +121,7 @@ export default function FightAddition({
           ))}
 
           <button
-            onClick={() => handleButtonClick('0')}
+            onClick={() => handleButtonClick("0")}
             className="nes-btn is-dark"
             disabled={gameOver || isCorrect}
           >

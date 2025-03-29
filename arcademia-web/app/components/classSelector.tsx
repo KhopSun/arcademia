@@ -20,7 +20,7 @@ export default function ClassSelect({ onNext }: ClassSelectProps) {
   >(null);
 
   const handleSubmit = () => {
-    if (selected) {
+    if (selected == 'Math') {
       setUserClass(selected);
       onNext();
     }
@@ -56,9 +56,9 @@ export default function ClassSelect({ onNext }: ClassSelectProps) {
       <button
         onClick={handleSubmit}
         disabled={!selected}
-        className="mt-6 nes-btn is-warning disabled:opacity-50"
+        className={`mt-6 nes-btn !text-xl ${selected=='Math'?'is-warning':'is-disabled'} disabled:opacity-50`}
       >
-        Confirm Class
+        Confirm
       </button>
     </div>
   );

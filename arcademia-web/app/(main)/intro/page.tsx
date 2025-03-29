@@ -7,6 +7,8 @@ import ProfessorScene from "@/app/components/professorScene";
 import { useUser } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import loading from '../../assets/icons/loading.svg'
+import Image from "next/image";
 
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
@@ -48,7 +50,7 @@ export default function Home() {
     //   {/* TODO: Render your next game component here */}
     // </div>
     <div className="flex items-center justify-center h-screen bg-[#EBDEC0] text-black">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#47423F]"></div>
+      <div className="animate-spin"><Image width={100} height={100} alt={'loading...'} src={loading}/></div>
       <span className="ml-4 text-xl w-8/10">Loading next stage...</span>
     </div>
   );

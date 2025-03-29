@@ -201,8 +201,8 @@ if (isAllZero) {
             ))}
           </tbody>
         </table>
-        <div className="flex my-4 justify-between">
-          <span className="nes-text is-warning">Coins: {coins}</span>
+        <div className="flex my-4 justify-end">
+          <span className="nes-text is-warning">{coins}<i className='nes-icon coin is-small'/></span>
         </div>
       </div>
 

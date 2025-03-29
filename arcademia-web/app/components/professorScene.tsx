@@ -44,9 +44,10 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  <strong>Archsage Calculo: </strong>Long ago, I was the
-                  guardian of Numeria—where math shaped magic and logic held the
-                  world in perfect balance
+                  <strong className="text-xs">Archsage Calculio: </strong>
+                  <br />
+                  Long ago, I was the guardian of Numeria—where math shaped
+                  magic and logic held the world in perfect balance
                   <br />
                   <br />
                   But then came Oblivor, the Lord of Unlearning. With one cursed
@@ -94,13 +95,13 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  <strong>Archsage Calculo: </strong>I fought to protect{" "}
-                  <strong>Numeria…</strong> but even I could not resist the
-                  Great Forgetting.
+                  <strong className="text-xs">Archsage Calculio </strong>
+                  <br />I fought to protect <strong>Numeria…</strong> but even I
+                  could not resist the Great Forgetting.
                   <br />
                   <br />
-                  Archsage Calculo, guardian of math, was sealed deep within the
-                  Logicspire, trapped in a prism of unbalance. Yet his mind
+                  Archsage Calculio, guardian of math, was sealed deep within
+                  the Logicspire, trapped in a prism of unbalance. Yet his mind
                   remains
                 </>
               }
@@ -140,7 +141,9 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  <strong>Archsage Calculo: </strong>Now, from within his
+                  <strong className="text-xs">Archsage Calculio </strong>
+                  <br/>
+                  Now, from within his
                   crystal prison,{" "}
                   <strong>
                     Calculio sends out a projection— one last chance to teach
