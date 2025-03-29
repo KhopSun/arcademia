@@ -20,7 +20,7 @@ export default function UserSelect({ onNext }: UserSelectProps) {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-[#47423F] text-white gap-6 px-4">
+    <div className="w-screen h-screen flex flex-col items-center justify-center gap-3 bg-[#47423F] text-white px-4">
       <h1 className="text-2xl nes-text mb-4 text-white text-center">
         Enter Your Name
       </h1>
@@ -36,13 +36,9 @@ export default function UserSelect({ onNext }: UserSelectProps) {
         />
       </div>
 
-      <div className="nes-container is-rounded bg-[#EBDEC0]">
-        <p className=" text-[#47423F] ">โปรดเลือกตัวละคร</p>
-      </div>
-
       {/* Gender image selection with white background, zoom effect, vertical layout */}
       <div className="flex flex-col gap-6">
-        <div className=" bg-white p-3 rounded-lg shadow-md items-center">
+        <div className="nes-container is-rounded bg-white p-3 rounded-lg shadow-md items-center">
           <img
             src="/assets/main_char/steve.png"
             alt="Male"
@@ -54,7 +50,7 @@ export default function UserSelect({ onNext }: UserSelectProps) {
             }`}
           />
         </div>
-        <div className=" bg-white p-3 rounded-lg shadow-md items-center">
+        <div className="nes-container is-rounded bg-white p-3 rounded-lg shadow-md items-center">
           <img
             src="/assets/main_char/girl_steve.png"
             alt="Female"

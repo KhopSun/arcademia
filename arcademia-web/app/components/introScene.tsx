@@ -29,7 +29,6 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
             <TextBubble
               text="It was a land where math shaped magic, science powered cities, language gave life to spells, and code held 
 the world together behind the scenes.
- Students became heroes. Scholars became legends.
  The four great kingdoms—Numeria, Scientia, Lingua, and Technos—guarded the sacred Crystal Codex, the 
 source of all learning."
               onNext={nextStep}
@@ -60,12 +59,16 @@ source of all learning."
             className="absolute bottom-[300px] left-1/2 transform -translate-x-1/2 z-20"
           />
           <TextBubble
-            text="Oblivor: Jealous of the world’s harmony and hungry for 
-control, he unleashed the Great Forgetting—a 
-catastrophic spell that shattered the Crystal 
-Codex and erased knowledge itself. Numbers 
-vanished. Equations dissolved. Language broke 
-apart. Code began to glitch and corrupt reality"
+            text={
+              <>
+                <strong>Oblivor:</strong> Jealous of the world’s harmony and
+                hungry for control, he unleashed the Great Forgetting — a
+                catastrophic spell that shattered the Crystal Codex and erased
+                knowledge itself. <br />
+                Numbers vanished. Equations dissolved. Language broke apart.
+                Code began to glitch and corrupt reality.
+              </>
+            }
             onNext={nextStep}
           />
         </>
@@ -75,20 +78,28 @@ apart. Code began to glitch and corrupt reality"
       {step === 2 && (
         <>
           <motion.img
-            src="/assets/background/four_cities_boom.png"
+            src="/assets/background/four_cities_destroyed.png"
             alt="Cracked"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute w-full h-full object-cover z-20"
           />
           <TextBubble
-            text="People forgot how to read. How to count. How to speak clearly or 
-invent anything at all.
- The world fell into chaos. The four kingdoms crumbled.
- And the Masters of Knowledge—guardians of each subject—
-was sealed away.
-Now, Arcanova is a fractured world, drowning in confusion and 
-fear"
+            text={
+              <>
+                People forgot how to read. How to count. How to speak clearly or
+                invent anything at all.
+                <br />
+                The world fell into chaos. The four kingdoms crumbled.
+                <br />
+                And the Masters of Knowledge—guardians of each subject—was
+                sealed away.
+                <br />
+                <br />
+                Now, <strong>Arcanova</strong> is a fractured world, drowning in
+                confusion and fear.
+              </>
+            }
             onNext={nextStep}
           />
         </>
@@ -100,7 +111,7 @@ fear"
           <motion.div
             initial={{ backgroundColor: "rgba(255,255,255,0)" }}
             animate={{ backgroundColor: "rgba(255,255,255,1)" }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 2 }}
             className="absolute w-full h-full z-30"
           />
           <motion.img
@@ -112,8 +123,15 @@ fear"
             className="absolute w-full h-full object-cover z-40"
           />
           <TextBubble
-            text="You were just a regular student, daydreaming in class...
- Until a glowing book opened on your desk and pulled you through a portal of swirling light."
+            text={
+              <>
+                You were just a regular student, daydreaming in class...
+                <br />
+                <br />
+                Until a glowing book opened on your desk and pulled you through
+                a portal of swirling light.
+              </>
+            }
             onNext={nextStep}
           />
         </>
