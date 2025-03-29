@@ -1,95 +1,60 @@
-"use client";  
+"use client";
 
 import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-
-import { lessonsData } from '@/app/lib/lessons';
 import LessonNode from './LessonNode';
 import { Lesson } from '@/app/lib/lessons';
 
-const getMonsterPosition = (index: number): React.CSSProperties => {
-    const verticalOffset = '50%'; 
-    const horizontalSpacing = '20%'; 
-    const horizontalOffset = `calc(100% + ${horizontalSpacing})`;
-    const transform = 'translateY(-50%)';
-
-    if (index % 2 === 1) {
-        return {
-            top: verticalOffset,
-            left: horizontalOffset,
-            transform: transform,
-        };
-    } else { 
-        return {
-            top: verticalOffset,
-            right: horizontalOffset,
-            transform: transform,
-        };
-    }
-};
+const lessonsData: Lesson[] = [
+  {
+    id: 'lesson-1',
+    title: 'Lesson',
+    status: 'completed',
+    type: 'lesson',
+  },
+  {
+    id: 'fight-1',
+    title: 'Fight',
+    status: 'current',
+    type: 'fight',
+  },
+  {
+    id: 'boss-1',
+    title: 'Boss Fight',
+    status: 'locked',
+    type: 'boss',
+    boss: 'monster3',
+  },
+];
 
 const QuestPage: React.FC = () => {
-    const [currentLesson, setCurrentLesson] = React.useState<Lesson | undefined>(() =>
-        lessonsData.find(lesson => lesson.status === 'current')
-    );
+  const [currentLesson, setCurrentLesson] = React.useState<Lesson | undefined>(() =>
+    lessonsData.find((lesson) => lesson.status === 'current')
+  );
 
-    React.useEffect(() => {
-        const updatedLesson = lessonsData.find(lesson => lesson.status === 'current');
-        setCurrentLesson(updatedLesson);
-    }, [lessonsData]);
+  React.useEffect(() => {
+    const updatedLesson = lessonsData.find((lesson) => lesson.status === 'current');
+    setCurrentLesson(updatedLesson);
+  }, []);
 
-    return (
-        <div className="flex flex-col items-center justify-start min-h-screen p-8 sm:p-12 font-[family-name:var(--font-geist-sans)] bg-[url('/assets/background/grasslandscape.jpg')] bg-center bg-cover pt-20 sm:pt-24">
-
-            {lessonsData.map((lesson, index) => {
-
-                const isCurrent = lesson.id === currentLesson?.id;
-
-                return (
-                
-                    <div key={lesson.id} className="w-full max-w-md flex justify-center mb-6 sm:mb-8">
-
-                        <div className="relative inline-block">
-                            <LessonNode
-                                lesson={lesson}
-                                isFirst={index === 0}
-                                isLast={index === lessonsData.length - 1}
-                            />
-
-                            {isCurrent && lesson.boss && (
-                                <motion.div
-                                    className="absolute w-24 h-24 sm:w-20 sm:h-20 rounded-lg overflow-hidden z-10"
-                                    style={getMonsterPosition(index)}
-                                    animate={{
-                                        transform: [
-                                            'translateY(-50%)',
-                                            'translateY(-65%)', 
-                                            'translateY(-50%)'  
-                                        ]
-                                    }}
-                                    transition={{
-                                        duration: 2.5,
-                                        ease: "easeInOut",
-                                        repeat: Infinity,
-                                        repeatType: "loop"
-                                    }}
-                                >
-                                    <Image
-                                        src={`/assets/monsters/${lesson.boss}.png`}
-                                        alt={`${lesson.boss || 'Quest Boss'} Monster`}
-                                        layout="fill"
-                                        objectFit="contain"
-                                        priority={isCurrent}
-                                    />
-                                </motion.div>
-                            )}
-                        </div> 
-                    </div>
-                );
-            })}
+  return (
+    <div
+      className="flex flex-col items-center justify-center min-h-screen gap-12 p-8 sm:p-12 bg-no-repeat bg-center"
+      style={{
+        backgroundImage: "url('/assets/background/Journey3.webp')",
+        backgroundSize: '400%', // 🔍 Zoomed in 2× more
+      }}
+    >
+      {lessonsData.map((lesson, index) => (
+        <div key={lesson.id} className="w-full max-w-md flex justify-center">
+          <LessonNode
+            lesson={lesson}
+            isFirst={index === 0}
+            isLast={index === lessonsData.length - 1}
+          />
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default QuestPage;

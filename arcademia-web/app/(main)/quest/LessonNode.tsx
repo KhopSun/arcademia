@@ -1,15 +1,16 @@
 "use client";
 import React from 'react';
 import { Lesson } from '@/app/lib/lessons';
-import { FaLock, FaCheck, FaStar, FaBookOpen } from 'react-icons/fa'; 
+import { FaLock, FaCheck, FaStar, FaBookOpen } from 'react-icons/fa';
+import { GiBroadsword, GiDragonHead } from 'react-icons/gi';
+
 interface LessonNodeProps {
   lesson: Lesson;
   isFirst: boolean;
-  isLast: boolean; 
+  isLast: boolean;
 }
 
 const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
-
   const getStatusStyles = (): string => {
     switch (lesson.status) {
       case 'completed':
@@ -24,24 +25,26 @@ const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
     }
   };
 
-    const getIcon = () => {
-        switch (lesson.status) {
-        case 'completed':
-            return <FaCheck className="w-5 h-5" />;
-        case 'current':
-            return <FaStar className="w-5 h-5" />; 
-        case 'locked':
-            return <FaLock className="w-5 h-5" />;
-        case 'unlocked':
-            return <FaBookOpen className="w-5 h-5 opacity-80" />;
-        default:
-            return null;
-        }
-    };
+  const getIcon = () => {
+    if (lesson.status === 'locked') return <FaLock className="w-5 h-5" />;
+    if (lesson.status === 'completed') return <FaCheck className="w-5 h-5" />;
+    if (lesson.status === 'current') return <FaStar className="w-5 h-5" />;
+
+    switch (lesson.type) {
+      case 'lesson':
+        return <FaBookOpen className="w-5 h-5 opacity-80" />;
+      case 'fight':
+        return <GiBroadsword className="w-5 h-5 opacity-80" />;
+      case 'boss':
+        return <GiDragonHead className="w-6 h-6 opacity-80" />;
+      default:
+        return null;
+    }
+  };
 
   const handleClick = () => {
     if (lesson.status === 'unlocked' || lesson.status === 'current') {
-      alert(`Starting lesson: ${lesson.title}`);
+      alert(`Starting: ${lesson.title}`);
     }
   };
 
@@ -53,16 +56,12 @@ const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
       {!isFirst && (
         <div
           className={`h-10 w-1 border-l-2 ${
-            lesson.status === 'locked' ? 'border-gray-300' : 'border-green-500' 
+            lesson.status === 'locked' ? 'border-gray-300' : 'border-green-500'
           } border-dashed`}
         />
       )}
 
       <div className="flex flex-col items-center relative">
-         <div className="absolute bottom-full mb-2 hidden group-hover:block px-2 py-1 bg-gray-700 text-white text-xs rounded shadow-lg whitespace-nowrap">
-            {lesson.title} - {lesson.status.charAt(0).toUpperCase() + lesson.status.slice(1)}
-         </div>
-
         <button
           onClick={handleClick}
           disabled={lesson.status === 'locked'}
@@ -72,9 +71,11 @@ const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
           {icon}
         </button>
 
-        <span className={`mt-2 text-center text-sm font-semibold ${lesson.status === 'locked' ? 'text-gray-400' : 'text-gray-700'}`}>
+        {/* Boxed Label Under Node */}
+        <div className={`mt-2 px-3 py-1 rounded border-2 font-bold text-sm shadow-md 
+          ${lesson.status === 'locked' ? 'bg-gray-300 border-gray-400 text-gray-500' : 'bg-[#e5d9c4] border-black text-gray-800'}`}>
           {lesson.title}
-        </span>
+        </div>
       </div>
     </div>
   );

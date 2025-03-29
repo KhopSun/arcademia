@@ -64,7 +64,7 @@ export default function FightAddition({
     <div
       className="min-h-screen flex flex-col items-center justify-start bg-no-repeat bg-center bg-cover p-6"
       style={{
-        backgroundImage: "url('/assets/background/fight/Autumn.png')",
+        backgroundImage: "url('/assets/background/fight/Autumn2.png')",
         backgroundSize: '250% 175%',
       }}
     >
