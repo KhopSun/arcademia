@@ -1,20 +1,28 @@
 "use client";
 import { useState } from "react";
 import IntroScene from "@/app/components/introScene";
-// import NextComponent from "@/components/NextComponent"; // placeholder for what's next
+import UserSelect from "@/app/components/userSelector";
+import { useUser } from "@/context/userContext";
 
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
+  const [genderStepDone, setGenderStepDone] = useState(false);
+
+  const { gender, name } = useUser();
+
+  if (!introDone) {
+    return <IntroScene onComplete={() => setIntroDone(true)} />;
+  }
+
+  if (!genderStepDone) {
+    return <UserSelect onNext={() => setGenderStepDone(true)} />;
+  }
 
   return (
-    <>
-      {!introDone ? (
-        <IntroScene onComplete={() => setIntroDone(true)} />
-      ) : (
-        <div className="text-white text-center mt-20">
-          Next Component Goes Here
-        </div>
-      )}
-    </>
+    <div className="text-white text-center mt-20">
+      Welcome, {name} ({gender?.toUpperCase()})!
+      <br />
+      {/* TODO: Render your next game component here */}
+    </div>
   );
 }

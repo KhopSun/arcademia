@@ -48,7 +48,7 @@ source of all learning."
           />
           <motion.div
             initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-            animate={{ backgroundColor: "rgba(0,0,0,0.7)" }}
+            animate={{ backgroundColor: "rgba(26, 0, 14, 0.8)" }}
             className="absolute w-full h-full z-10"
           />
           <motion.img
