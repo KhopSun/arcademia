@@ -93,8 +93,8 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  I fought to protect Numeria… but even I could not resist the
-                  Great Forgetting.
+                  I fought to protect <strong>Numeria…</strong> but even I could
+                  not resist the Great Forgetting.
                   <br />
                   <br />
                   Archsage Calculo, guardian of math, was sealed deep within the
@@ -131,9 +131,6 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <motion.img
               src="/assets/teachers/fullbody_professor.png"
               alt="Professor"
-              //   initial={{ opacity: 0, scale: 0.7 }}
-              //   animate={{ opacity: 1, scale: 1 }}
-              //   transition={{ duration: 1, delay: 1 }}
               className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-104"
             />
 
@@ -141,8 +138,10 @@ export default function ProfessorScene({ onNext }: { onNext: () => void }) {
             <TextBubble
               text={
                 <>
-                  Now, from within his crystal prison, Calculio sends out a
-                  projection— one last chance to teach
+                  Now, from within his crystal prison,{" "}
+                  <strong>
+                    Calculio sends out a projection— one last chance to teach
+                  </strong>
                 </>
               }
               onNext={onNext}
