@@ -3,30 +3,37 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 type Gender = "male" | "female" | null;
 
+export type UserClass = "Math" | "English" | "Science" | "Coding" | null;
+
 type userContext = {
   gender: Gender;
   name: string;
+  userClass: UserClass;
   setGender: (gender: Gender) => void;
   setName: (name: string) => void;
+  setUserClass: (userClass: UserClass) => void;
 };
 
-const GenderContext = createContext<userContext | undefined>(undefined);
+const UserContext = createContext<userContext | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [gender, setGender] = useState<Gender>(null);
   const [name, setName] = useState<string>("");
+  const [userClass, setUserClass] = useState<UserClass>(null);
 
   return (
-    <GenderContext.Provider value={{ gender, setGender, name, setName }}>
+    <UserContext.Provider
+      value={{ gender, setGender, name, setName, userClass, setUserClass }}
+    >
       {children}
-    </GenderContext.Provider>
+    </UserContext.Provider>
   );
 }
 
 export function useUser() {
-  const context = useContext(GenderContext);
+  const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useGender must be used within a GenderProvider");
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 }

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 type TextBubbleProps = {
-  text: string;
+  text: React.ReactNode;
   onNext: () => void;
 };
 
