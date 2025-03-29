@@ -11,8 +11,8 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-} from '@clerk/nextjs'
-import './globals.css'
+} from "@clerk/nextjs";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +20,7 @@ const geistSans = Geist({
 });
 
 const pressStart2P = Press_Start_2P({
-  weight: ['400'],
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -45,18 +45,18 @@ export default function RootLayout({
         <body
           className={`${pressStart2P.className} ${geistMono.variable} antialiased`}
         >
-         <header className="flex justify-end items-center p-4 gap-4 h-16">
+          {/* <header className="flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
               <SignInButton />
-            <SignUpButton />
+              <SignUpButton />
             </SignedOut>
             <SignedIn>
               <UserButton />
-           </SignedIn>
-          </header>
+            </SignedIn>
+          </header> */}
           {children}
         </body>
-        <BottomNavBar/>
+        <BottomNavBar />
       </html>
     </ClerkProvider>
   );
