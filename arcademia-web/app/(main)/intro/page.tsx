@@ -3,6 +3,7 @@ import { useState } from "react";
 import IntroScene from "@/app/components/introScene";
 import UserSelect from "@/app/components/userSelector";
 import ClassSelect from "@/app/components/classSelector";
+import ProfessorScene from "@/app/components/professorScene";
 import { useUser } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -16,11 +17,11 @@ export default function Home() {
   const { gender, name, userClass } = useUser();
   const router = useRouter();
 
-  useEffect(() => {
-    if (classStepDone) {
-      router.push("/quest");
-    }
-  }, [classStepDone]);
+  //   useEffect(() => {
+  //     if (classStepDone) {
+  //       router.push("/quest");
+  //     }
+  //   }, [setMathIntro]);
 
   if (!introDone) {
     return <IntroScene onComplete={() => setIntroDone(true)} />;
@@ -35,7 +36,7 @@ export default function Home() {
   }
 
   if (!mathIntro) {
-    return;
+    return <ProfessorScene onNext={() => setMathIntro(true)}></ProfessorScene>;
   }
 
   return (
