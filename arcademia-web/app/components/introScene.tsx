@@ -19,7 +19,7 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
         {step === 0 && (
           <>
             <motion.img
-              src="@/app/assets/background/four_cities.png"
+              src="/assets/background/four_cities.png"
               alt="Four Cities"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -35,7 +35,7 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
       {step === 1 && (
         <>
           <motion.img
-            src="@/app/assets/background/four_cities.png"
+            src="/assets/background/four_cities.png"
             alt="Four Cities"
             className="absolute w-full h-full object-cover"
           />
@@ -45,7 +45,7 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
             className="absolute w-full h-full z-10"
           />
           <motion.img
-            src="@/app/assets/villain/villain.png"
+            src="/assets/villain/villain.png"
             alt="Villain"
             initial={{ y: 500, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -60,7 +60,7 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
       {step === 2 && (
         <>
           <motion.img
-            src="@/app/assets/background/four_cities_boom.png"
+            src="/assets/background/four_cities_boom.png"
             alt="Cracked"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -80,7 +80,7 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
             className="absolute w-full h-full z-30"
           />
           <motion.img
-            src="@/app/assets/background/opened_book.png"
+            src="/assets/background/opened_book.png"
             alt="booked glow"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
