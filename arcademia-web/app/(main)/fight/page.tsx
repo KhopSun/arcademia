@@ -34,14 +34,17 @@ export default function Battle() {
   };
 
   const currentMonster = monsters[current];
+  const [hearts, setHearts] = useState(3);
 
   return (
     <FightAddition
-      key={current} // force re-mount for animation
-      question={currentMonster.question}
-      answer={currentMonster.answer}
-      monsterImgSrc={currentMonster.monsterImgSrc}
-      onNext={handleNext}
+        key={current}
+        question={currentMonster.question}
+        answer={currentMonster.answer}
+        monsterImgSrc={currentMonster.monsterImgSrc}
+        onNext={handleNext}
+        hearts={hearts}
+        setHearts={setHearts}
     />
   );
 }
