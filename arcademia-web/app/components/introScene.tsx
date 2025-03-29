@@ -26,7 +26,14 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
               exit={{ opacity: 0 }}
               className="absolute w-full h-full object-cover"
             />
-            <TextBubble text="test1" onNext={nextStep} />
+            <TextBubble
+              text="It was a land where math shaped magic, science powered cities, language gave life to spells, and code held 
+the world together behind the scenes.
+ Students became heroes. Scholars became legends.
+ The four great kingdoms—Numeria, Scientia, Lingua, and Technos—guarded the sacred Crystal Codex, the 
+source of all learning."
+              onNext={nextStep}
+            />
           </>
         )}
       </AnimatePresence>
@@ -50,9 +57,17 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
             initial={{ y: 500, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 80 }}
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 w-1/2"
+            className="absolute bottom-[300px] left-1/2 transform -translate-x-1/2 z-20"
           />
-          <TextBubble text="test2" onNext={nextStep} />
+          <TextBubble
+            text="Oblivor: Jealous of the world’s harmony and hungry for 
+control, he unleashed the Great Forgetting—a 
+catastrophic spell that shattered the Crystal 
+Codex and erased knowledge itself. Numbers 
+vanished. Equations dissolved. Language broke 
+apart. Code began to glitch and corrupt reality"
+            onNext={nextStep}
+          />
         </>
       )}
 
@@ -66,7 +81,16 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
             animate={{ opacity: 1 }}
             className="absolute w-full h-full object-cover z-20"
           />
-          <TextBubble text="test3" onNext={nextStep} />
+          <TextBubble
+            text="People forgot how to read. How to count. How to speak clearly or 
+invent anything at all.
+ The world fell into chaos. The four kingdoms crumbled.
+ And the Masters of Knowledge—guardians of each subject—
+was sealed away.
+Now, Arcanova is a fractured world, drowning in confusion and 
+fear"
+            onNext={nextStep}
+          />
         </>
       )}
 
@@ -88,7 +112,29 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
             className="absolute w-full h-full object-cover z-40"
           />
           <TextBubble
-            text="test4"
+            text="You were just a regular student, daydreaming in class...
+ Until a glowing book opened on your desk and pulled you through a portal of swirling light."
+            onNext={nextStep}
+          />
+        </>
+      )}
+
+      {step === 4 && (
+        <>
+          <motion.img
+            src="/assets/background/opened_book.png"
+            alt="booked glow"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute w-full h-full object-cover z-40"
+          />
+          <TextBubble
+            text="
+ A voice speaks from within the Codex:
+“You are the Last Learner. The only one who can still 
+absorb knowledge. You are the world’s only hope.”
+Your journey begins now"
             onNext={() => {
               if (onComplete) onComplete(); // move to next component
             }}
