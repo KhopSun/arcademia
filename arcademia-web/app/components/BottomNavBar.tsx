@@ -3,7 +3,7 @@ import profileIcon from "../assets/icons/user.svg";
 import shopIcon from "../assets/icons/coin.svg";
 import questIcon from "../assets/icons/target.svg";
 import Link from "next/link";
-import navbarBg from "../assets/background/navbarbg.png";
+import navbarBg from "/public/assets/background/navbarbg.png";
 
 export default function BottomNavBar() {
   return (
