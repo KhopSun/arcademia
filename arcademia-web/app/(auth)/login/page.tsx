@@ -14,7 +14,7 @@ export default function Login() {
     try {
       await clerk.redirectToSignIn({
         signInOptions: { strategy: 'oauth_google' },
-        afterSignInUrl: '/tabs',
+        redirectUrl: '/quest',
       })
     } catch (error) {
       console.error('OAuth error:', error)
