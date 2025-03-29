@@ -18,10 +18,10 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (classStepDone) {
+    if (mathIntro) {
       router.push("/quest");
     }
-  }, [setMathIntro]);
+  }, [mathIntro]);
 
   if (!introDone) {
     return <IntroScene onComplete={() => setIntroDone(true)} />;
