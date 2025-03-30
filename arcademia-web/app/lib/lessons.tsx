@@ -31,6 +31,6 @@ export const lessonsData: Lesson[] = [
     title: "Boss Fight",
     status: "locked",
     boss: "final_math_boss",
-    path: "/quest",
+    path: "/boss",
   },
 ];
