@@ -94,12 +94,12 @@ export default function LearnAddition({
 
       {/* Question Box */}
       <div className="bg-[#e5d9c4] nes-container is-rounded px-4 py-0 shadow-md max-w-md text-center mb-4">
-        <span className="text-black font-bold text-2xl leading-none inline-block mt-2 mb-2">
+        <span className="text-black font-bold text-2xl leading-none inline-block">
           {question}
         </span>
       </div>
 
-      <div className="relative mb-4 w-64 h-64"> 
+      <div className="relative w-64 h-64"> 
         <img
           src="/assets/effects/target.png"
           alt="target"
