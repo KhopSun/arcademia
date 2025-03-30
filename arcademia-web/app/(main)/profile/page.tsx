@@ -21,6 +21,7 @@ import femaleEnglishClass from "@/public/assets/class/characters/english/female_
 import femaleCodeClass from "@/public/assets/class/characters/code/female_code.png";
 import femaleLearner from "@/public/assets/class/characters/learner/female_learner.png";
 import maleLearner from "@/public/assets/class/characters/learner/male_learner.png";
+import statsBg from "@/public/assets/background/statsbg.png";
 
 const ProfilePage: React.FC = () => {
   const { name, coins, items, gender, stats, exp } = useUser(); // Assuming 'gender' is available in user context
@@ -142,7 +143,7 @@ const ProfilePage: React.FC = () => {
     >
       {/* Profile Section */}
       <div
-        className="flex-col nes-container gap-4 flex items-center justify-center w-full p-9 bg-center bg-fill h-[390px]"
+        className="flex-col shadow-xl nes-container gap-4 flex items-center justify-center w-full p-9 bg-center bg-fill h-[390px]"
         style={{ backgroundImage: `url(${profileBg.src})` }}
       >
         <Image
@@ -166,7 +167,7 @@ const ProfilePage: React.FC = () => {
       </div>
 
       {/* Class and Skills Section */}
-      <div className="nes-container is-dark flex-col p-4 w-full">
+      <div className="nes-container is-dark flex-col shadow-xl p-4 w-full">
         <div className="flex justify-center items-center gap-6">
           {/* Class Section */}
           <div>
@@ -188,7 +189,10 @@ const ProfilePage: React.FC = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="nes-container flex-col flex justify-center bg-[#9c664d] !w-full p-4">
+      <div
+        className="flex-col nes-container flex justify-center w-full bg-center h-[400px] bg-cover"
+        style={{ backgroundImage: `url(${statsBg.src})`, padding: 16 }}
+      >
         <span className="flex justify-center text-2xl">Stats</span>
         <table className="!w-full">
           <tbody>
@@ -236,25 +240,27 @@ const ProfilePage: React.FC = () => {
             <h2 className="text-center text-2xl nes-text is-primary">
               Inventory
             </h2>
-            <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="flex flex-col items-center">
               {/* Display the items dynamically */}
               {items.length > 0 ? (
-                items.map((item, index) => (
-                  <div
-                    key={index}
-                    className="nes-container is-rounded flex flex-col items-center justify-center h-24 w-24 gap-1"
-                  >
-                    <Image
-                      src={item.icon}
-                      width={70}
-                      height={70}
-                      alt={item.name}
-                    ></Image>
-                    <span className="text-xs">{item.name}</span>
-                  </div>
-                ))
+                <div className="grid grid-cols-3 gap-4 mt-4">
+                  {items.map((item, index) => (
+                    <div
+                      key={index}
+                      className="nes-container is-rounded flex flex-col items-center justify-center h-24 w-24 gap-1"
+                    >
+                      <Image
+                        src={item.icon}
+                        width={70}
+                        height={70}
+                        alt={item.name}
+                      />
+                      <span className="text-xs">{item.name}</span>
+                    </div>
+                  ))}
+                </div>
               ) : (
-                <div className="nes-container is-rounded flex items-center justify-center h-20 w-20">
+                <div className="mt-4 nes-container is-rounded flex items-center justify-center h-20 w-full">
                   <span>No items yet</span>
                 </div>
               )}
