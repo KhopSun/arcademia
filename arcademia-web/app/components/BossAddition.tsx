@@ -103,7 +103,7 @@ export default function BossAddition({
       <div className="mt-4 mb-2 text-center h-8 z-50">
         {isCorrect && (
           <p className="text-[#fff275] font-bold text-xl animate-bounce">
-            Monster Defeated!
+            The Boss was hit!
           </p>
         )}
         {gameOver && (
@@ -123,7 +123,7 @@ export default function BossAddition({
       {/* ❤️ Health Bar */}
       <div className="w-full max-w-xs mt-2">
         <progress
-          className="nes-progress is-error"
+          className="nes-progress is-warning"
           value={bossHealth}
           max="100"
           style={{ height: "20px" }}
