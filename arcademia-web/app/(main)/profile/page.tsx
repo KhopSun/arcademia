@@ -19,6 +19,8 @@ import femaleMathClass from "@/public/assets/class/characters/math/female_math.p
 import femaleScienceClass from "@/public/assets/class/characters/science/female_science.png";
 import femaleEnglishClass from "@/public/assets/class/characters/english/female_bard.png";
 import femaleCodeClass from "@/public/assets/class/characters/code/female_code.png";
+import femaleLearner from "@/public/assets/class/characters/learner/female_learner.png";
+import maleLearner from "@/public/assets/class/characters/learner/male_learner.png";
 
 const ProfilePage: React.FC = () => {
   const { name, coins, items, gender, stats, exp } = useUser(); // Assuming 'gender' is available in user context
@@ -27,96 +29,101 @@ const ProfilePage: React.FC = () => {
   const [showSkillsModal, setShowSkillsModal] = useState(false);
 
   const statsList = [
-    { icon: scienceIcon, label: "Science", color: "is-error", value: stats.science },
+    {
+      icon: scienceIcon,
+      label: "Science",
+      color: "is-error",
+      value: stats.science,
+    },
     { icon: mathIcon, label: "Math", color: "is-primary", value: stats.math },
     { icon: codeIcon, label: "Coding", color: "is-warning", value: stats.code },
-    { icon: languageIcon, label: "Language", color: "is-success", value: stats.english },
+    {
+      icon: languageIcon,
+      label: "Language",
+      color: "is-success",
+      value: stats.english,
+    },
   ];
 
   // Determine if all stats are zero
-const isAllZero = statsList.every((stat) => stat.value === 0);
+  const isAllZero = statsList.every((stat) => stat.value === 0);
 
-// If all stats are zero, assign the "Learner" class
-let className = "";
-let classImage = "";
-let classDescription = "";
-let careerList: string[] = [];
-let genderClassImage = ""; // For the correct gender image
+  // If all stats are zero, assign the "Learner" class
+  let className = "";
+  let classImage = "";
+  let classDescription = "";
+  let careerList: string[] = [];
+  let genderClassImage = ""; // For the correct gender image
 
-if (isAllZero) {
-  className = "Learner";
-  classDescription = "The Learner class is just starting out on their journey. They are full of potential and eager to learn. With time, they will develop their skills and find their true path.";
-  careerList = [
-    "Student",
-    "Apprentice",
-    "Intern",
-    "Trainee",
-    "Beginner",
-  ];
-  genderClassImage = gender === "male" ? maleMathClass.src : femaleMathClass.src; // You can use a generic class image for Learner
-} else {
-  // Determine class based on highest stat
-  const highestStat = statsList.reduce((prev, current) =>
-    prev.value > current.value ? prev : current
-  );
+  if (isAllZero) {
+    className = "Learner";
+    classDescription =
+      "The Learner class is just starting out on their journey. They are full of potential and eager to learn. With time, they will develop their skills and find their true path.";
+    careerList = ["Student", "Apprentice", "Intern", "Trainee", "Beginner"];
+    genderClassImage = gender === "male" ? maleLearner.src : femaleLearner.src; // You can use a generic class image for Learner
+  } else {
+    // Determine class based on highest stat
+    const highestStat = statsList.reduce((prev, current) =>
+      prev.value > current.value ? prev : current
+    );
 
-  switch (highestStat.label) {
-    case "Math":
-      className = "Mathemagician";
-      classDescription = `The ${className} class is a master of numbers and logic. They use mathematical principles to manipulate the world around them, solving complex problems and discovering new patterns.`;
-      careerList = [
-        "Mathematician",
-        "Statistician",
-        "Data Scientist",
-        "Cryptographer",
-        "Engineer",
-      ];
-      genderClassImage =
-        gender === "male" ? maleMathClass.src : femaleMathClass.src;
-      break;
-    case "Science":
-      className = "Alchemist";
-      classDescription = `The ${className} class is deeply connected with the laws of nature. They experiment with the natural world, uncovering secrets to create new substances and uncover the mysteries of life.`;
-      careerList = [
-        "Chemist",
-        "Biologist",
-        "Pharmacist",
-        "Environmental Scientist",
-        "Researcher",
-      ];
-      genderClassImage =
-        gender === "male" ? maleScienceClass.src : femaleScienceClass.src;
-      break;
-    case "Language":
-      className = "Bard";
-      classDescription = `The ${className} class uses their mastery of language to inspire and persuade. They use words and poetry to shape the world, tell stories, and motivate others.`;
-      careerList = [
-        "Writer",
-        "Linguist",
-        "Journalist",
-        "Public Speaker",
-        "Translator",
-      ];
-      genderClassImage =
-        gender === "male" ? maleEnglishClass.src : femaleEnglishClass.src;
-      break;
-    case "Coding":
-      className = "Technomancer";
-      classDescription = `The ${className} class is a tech wizard, wielding code like magic to create software, control machines, and shape the digital world. They are at the forefront of technological innovation.`;
-      careerList = [
-        "Software Developer",
-        "Web Developer",
-        "Systems Analyst",
-        "AI Engineer",
-        "Cybersecurity Expert",
-      ];
-      genderClassImage =
-        gender === "male" ? maleCodeClass.src : femaleCodeClass.src;
-      break;
-    default:
-      break;
+    switch (highestStat.label) {
+      case "Math":
+        className = "Mathemagician";
+        classDescription = `The ${className} class is a master of numbers and logic. They use mathematical principles to manipulate the world around them, solving complex problems and discovering new patterns.`;
+        careerList = [
+          "Mathematician",
+          "Statistician",
+          "Data Scientist",
+          "Cryptographer",
+          "Engineer",
+        ];
+        genderClassImage =
+          gender === "male" ? maleMathClass.src : femaleMathClass.src;
+        break;
+      case "Science":
+        className = "Alchemist";
+        classDescription = `The ${className} class is deeply connected with the laws of nature. They experiment with the natural world, uncovering secrets to create new substances and uncover the mysteries of life.`;
+        careerList = [
+          "Chemist",
+          "Biologist",
+          "Pharmacist",
+          "Environmental Scientist",
+          "Researcher",
+        ];
+        genderClassImage =
+          gender === "male" ? maleScienceClass.src : femaleScienceClass.src;
+        break;
+      case "Language":
+        className = "Bard";
+        classDescription = `The ${className} class uses their mastery of language to inspire and persuade. They use words and poetry to shape the world, tell stories, and motivate others.`;
+        careerList = [
+          "Writer",
+          "Linguist",
+          "Journalist",
+          "Public Speaker",
+          "Translator",
+        ];
+        genderClassImage =
+          gender === "male" ? maleEnglishClass.src : femaleEnglishClass.src;
+        break;
+      case "Coding":
+        className = "Technomancer";
+        classDescription = `The ${className} class is a tech wizard, wielding code like magic to create software, control machines, and shape the digital world. They are at the forefront of technological innovation.`;
+        careerList = [
+          "Software Developer",
+          "Web Developer",
+          "Systems Analyst",
+          "AI Engineer",
+          "Cybersecurity Expert",
+        ];
+        genderClassImage =
+          gender === "male" ? maleCodeClass.src : femaleCodeClass.src;
+        break;
+      default:
+        break;
+    }
   }
-}
 
   // Function to handle showing skills modal
   const handleSkillsClick = () => {
@@ -138,7 +145,12 @@ if (isAllZero) {
         className="flex-col nes-container gap-4 flex items-center justify-center w-full p-9 bg-center bg-fill h-[390px]"
         style={{ backgroundImage: `url(${profileBg.src})` }}
       >
-        <Image alt="male" src={gender=='male'? maleChar: femaleChar} width={200} height={200} />
+        <Image
+          alt="male"
+          src={gender == "male" ? maleChar : femaleChar}
+          width={200}
+          height={200}
+        />
         <div className="nes-container is-rounded px-4 py-2">
           <span className="text-2xl">{name}</span>
         </div>
@@ -202,7 +214,10 @@ if (isAllZero) {
           </tbody>
         </table>
         <div className="flex my-4 justify-end">
-          <span className="nes-text is-warning">{coins}<i className='nes-icon coin is-small'/></span>
+          <span className="nes-text is-warning">
+            {coins}
+            <i className="nes-icon coin is-small" />
+          </span>
         </div>
       </div>
 
@@ -271,16 +286,15 @@ if (isAllZero) {
               />
               <p className="text-sm">{classDescription}</p>
               <div>
-              <h3 className="mt-4 nes-text is-warning">Real-life Careers:</h3>
-              <div className="lists">
-                <ul className="nes-list is-disc">
-                  {careerList.map((career, index) => (
-                    <li key={index}>• {career}</li>
-                  ))}
-                </ul>
+                <h3 className="mt-4 nes-text is-warning">Real-life Careers:</h3>
+                <div className="lists">
+                  <ul className="nes-list is-disc">
+                    {careerList.map((career, index) => (
+                      <li key={index}>• {career}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              </div>
-              
             </div>
             {/* Close Button */}
             <button
