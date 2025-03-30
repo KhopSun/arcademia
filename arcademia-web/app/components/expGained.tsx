@@ -72,7 +72,7 @@ export default function ExpGained({
         <p>
           You gained <span className="text-green-500">{Exp} EXP</span>
           <br />
-          <span className="text-yellow-400">{Coins} <i className="nes-icon coin is-medium"/></span>!
+          <span className="text-yellow-400">{Coins} <i className="nes-icon coin is-small"/></span>!
         </p>
         <p>Your new total EXP: {previousExp + Exp}</p>
         <p>Your new total Coins: {previousCoins + Coins}</p>
