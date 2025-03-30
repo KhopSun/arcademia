@@ -5,8 +5,18 @@ type Gender = "male" | "female" | null;
 
 export type UserClass = "Math" | "English" | "Science" | "Coding" | null;
 
-export type Item = {'name': string, 'description': string, 'price': number, 'icon': string}
-export type Stats = {'science':number, 'code':number, 'math':number, 'english':number}
+export type Item = {
+  name: string;
+  description: string;
+  price: number;
+  icon: string;
+};
+export type Stats = {
+  science: number;
+  code: number;
+  math: number;
+  english: number;
+};
 
 type userContext = {
   gender: Gender;
@@ -21,7 +31,7 @@ type userContext = {
   setUserClass: (userClass: UserClass) => void;
   setCoins: (coins: number) => void;
   setItems: (items: Item[]) => void;
-  setStats: (stats: Stats) => void;
+  setStats: React.Dispatch<React.SetStateAction<Stats>>;
   setExp: (exp: number) => void;
 };
 
@@ -33,11 +43,31 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [userClass, setUserClass] = useState<UserClass>(null);
   const [coins, setCoins] = useState<number>(100);
   const [items, setItems] = useState<Item[]>([]);
-  const [stats, setStats] = useState<Stats>({ science: 0, code: 0, math: 0, english: 0 });
+  const [stats, setStats] = useState<Stats>({
+    science: 0,
+    code: 0,
+    math: 0,
+    english: 0,
+  });
   const [exp, setExp] = useState<number>(0);
   return (
     <UserContext.Provider
-      value={{ gender, setGender, name, setName, userClass, setUserClass, coins, setCoins, items, setItems, stats, setStats, exp, setExp }}
+      value={{
+        gender,
+        setGender,
+        name,
+        setName,
+        userClass,
+        setUserClass,
+        coins,
+        setCoins,
+        items,
+        setItems,
+        stats,
+        setStats,
+        exp,
+        setExp,
+      }}
     >
       {children}
     </UserContext.Provider>

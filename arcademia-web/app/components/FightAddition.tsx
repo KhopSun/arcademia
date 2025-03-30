@@ -1,11 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+export type Stats = {
+  science: number;
+  code: number;
+  math: number;
+  english: number;
+};
 
 type FightAdditionProps = {
   question: string;
   answer: number;
-  onNext: () => void;
+  onNext: (exp: number, coins: number, statGain: Partial<Stats>) => void;
   monsterImgSrc: string;
   hearts: number;
   setHearts: React.Dispatch<React.SetStateAction<number>>;
@@ -35,17 +42,24 @@ export default function FightAddition({
     }
   };
 
+  useEffect(() => {
+    if (hearts <= 0 && !gameOver) {
+      setGameOver(true);
+      setTimeout(() => {
+        onNext(0, 0, {});
+      }, 1000);
+    }
+  }, [hearts, gameOver, onNext]);
+
   const handleSubmit = () => {
     if (parseInt(input) === answer) {
       setIsCorrect(true);
-      setTimeout(onNext, 1000);
+      setTimeout(() => {
+        onNext(100, 150, { math: 10 });
+      }, 1000);
     } else {
-      const remaining = hearts - 1;
-      setHearts(remaining);
+      setHearts((prev) => prev - 1);
       setInput("");
-      if (remaining <= 0) {
-        setGameOver(true);
-      }
     }
   };
 
@@ -71,7 +85,7 @@ export default function FightAddition({
       }}
     >
       {/* 🟡 Top Status */}
-      <div className="mt-4 mb-2 text-center h-8">
+      <div className="mt-4 mb-2 text-center h-8 z-50">
         {isCorrect && (
           <p className="text-[#fff275] font-bold text-xl animate-bounce">
             Monster Defeated!
