@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import HitEffect from "./HitEffect";
 
 export type Stats = {
   science: number;
@@ -10,31 +9,37 @@ export type Stats = {
   english: number;
 };
 
-type FightAdditionProps = {
+type BossAdditionProps = {
   question: string;
   answer: number;
   onNext: (exp: number, coins: number, statGain: Partial<Stats>) => void;
   monsterImgSrc: string;
   hearts: number;
   setHearts: React.Dispatch<React.SetStateAction<number>>;
-  onWin: () => void;
-  onLose: () => void;
+  bossHealth: number;
 };
 
-export default function FightAddition({
+export default function BossAddition({
   question,
   answer,
   onNext,
   monsterImgSrc,
   hearts,
   setHearts,
-  onWin,
-  onLose,
-}: FightAdditionProps) {
+  bossHealth,
+}: BossAdditionProps) {
   const [input, setInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [showHitEffect, setShowHitEffect] = useState(false);
+
+  useEffect(() => {
+    if (hearts <= 0 && !gameOver) {
+      setGameOver(true);
+      setTimeout(() => {
+        onNext(0, 0, {});
+      }, 1000);
+    }
+  }, [hearts, gameOver, onNext]);
 
   const handleButtonClick = (value: string) => {
     if (!isCorrect && !gameOver) {
@@ -48,27 +53,17 @@ export default function FightAddition({
     }
   };
 
-  useEffect(() => {
-    if (hearts <= 0 && !gameOver) {
-      setGameOver(true);
-      setTimeout(() => {
-        onLose(); // Call onLose when the game is over due to no hearts
-        onNext(0, 0, {});
-      }, 1000);
-    }
-  }, [hearts, gameOver, onLose, onNext]);
-
   const handleSubmit = () => {
     if (parseInt(input) === answer) {
       setIsCorrect(true);
       setTimeout(() => {
-        onWin(); // Call onWin when the answer is correct
         onNext(100, 150, { math: 5 });
-      }, 1000);
+        setIsCorrect(false);
+        setInput("");
+      }, 500);
     } else {
       setHearts((prev) => prev - 1);
       setInput("");
-      setShowHitEffect(true);
     }
   };
 
@@ -93,34 +88,42 @@ export default function FightAddition({
         backgroundSize: "250% 175%",
       }}
     >
-      <HitEffect
-        trigger={showHitEffect}
-        onEnd={() => setShowHitEffect(false)}
-      />
       {/* 🟡 Top Status */}
       <div className="mt-4 mb-2 text-center h-8 z-50">
         {isCorrect && (
           <p className="text-[#fff275] font-bold text-xl animate-bounce">
-            Monster Defeated!
+            Hit!
           </p>
         )}
         {gameOver && (
           <p className="text-red-400 font-bold text-xl">💀 Game Over 💀</p>
         )}
       </div>
+
       {renderHearts()}
-      {/* ❓ Question + ❤️ Hearts */}
-      <div className="bg-[#e5d9c4] nes-container is-rounded  px-4 py-0 shadow-md max-w-md text-center">
-        <span className="text-black font-bold text-2xl leading-none inline-block mt-2 mb-2">
+
+      {/* ❓ Question Box */}
+      <div className="bg-[#e5d9c4] nes-container is-rounded px-4 py-0 shadow-md max-w-md text-center">
+        <span className="text-black font-bold text-2xl leading-none inline-block mb-2">
           {question}
         </span>
+      </div>
+
+      {/* ❤️ Health Bar */}
+      <div className="w-full max-w-xs mt-2">
+        <progress
+          className="nes-progress is-error"
+          value={bossHealth}
+          max="100"
+          style={{ height: "2px" }}
+        ></progress>
       </div>
 
       {/* 👾 Monster */}
       <img
         src={monsterImgSrc}
         alt="monster"
-        className="w-64 h-64 object-contain mb-2"
+        className="w-64 h-55 object-contain"
       />
 
       {/* 📦 Battle Box UI */}

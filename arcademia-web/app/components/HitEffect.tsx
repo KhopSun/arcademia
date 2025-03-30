@@ -22,10 +22,7 @@ export default function HitEffect({ trigger, onEnd }: HitEffectProps) {
 
   return visible ? (
     <>
-      <div className="fixed inset-0 bg-red-500 animate-hitFlash z-50"></div>
-      <div className="nes-container is-dark absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center">
-        <span className="text-3xl text-white font-bold">You got hit</span>
-      </div>
+      <div className="fixed inset-0 flex justify-center items-center bg-red-500 animate-hitFlash z-50"></div>
     </>
   ) : null;
 }

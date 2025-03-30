@@ -33,7 +33,7 @@ export default function Battle() {
   const [current, setCurrent] = useState(0);
   const [hearts, setHearts] = useState(3);
   const [battleDone, setBattleDone] = useState(false);
-
+  const [isWon, setIsWon] = useState(false);
   // Rewards after last fight
   const [expGain, setExpGain] = useState(0);
   const [coinsGain, setCoinsGain] = useState(0);
@@ -58,7 +58,7 @@ export default function Battle() {
   };
 
   if (battleDone) {
-    return <ExpGained Exp={expGain} Coins={coinsGain} statGain={statGain} />;
+    return <ExpGained isWon={isWon} Exp={expGain} Coins={coinsGain} statGain={statGain} />;
   }
 
   const currentMonster = monsters[current];
@@ -72,6 +72,8 @@ export default function Battle() {
       onNext={handleNext}
       hearts={hearts}
       setHearts={setHearts}
+      onWin={()=>setIsWon(true)}
+      onLose={()=>setIsWon(false)}
     />
   );
 }

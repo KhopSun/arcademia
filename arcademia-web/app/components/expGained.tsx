@@ -14,10 +14,12 @@ export default function ExpGained({
   Exp,
   Coins,
   statGain,
+  isWon
 }: {
   Exp: number;
   Coins: number;
   statGain: Partial<Stats>;
+  isWon: boolean;
 }) {
   const { exp, setExp, stats, setStats, coins, setCoins } = useUser();
   const [added, setAdded] = useState(false);
@@ -65,11 +67,12 @@ export default function ExpGained({
       className="flex flex-col items-center justify-center h-screen text-2xl font-bold gap-4 bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/background/wood.png')" }} // ✅ adjust path as needed
     >
+      <span className={isWon?'nes-text !text-2xl is-success':'nes-text !text-2xl is-error'}>{isWon?'You Won!':'You Lost'}</span>
       <div className="nes-container is-rounded bg-white bg-opacity-80 p-8 rounded-xl text-center shadow-md w-9/10">
         <p>
           You gained <span className="text-green-500">{Exp} EXP</span>
           <br />
-          <span className="text-yellow-400">{Coins} Coins</span>!
+          <span className="text-yellow-400">{Coins} <i className="nes-icon coin is-small"/></span>!
         </p>
         <p>Your new total EXP: {previousExp + Exp}</p>
         <p>Your new total Coins: {previousCoins + Coins}</p>

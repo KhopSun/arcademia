@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import HitEffect from "./HitEffect";
+import React, { useState } from "react";
+import HitEffect from "./HitEffect"; // Import the hit effect component
+import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
 
-export type Stats = {
+type Stats = {
   science: number;
   code: number;
   math: number;
@@ -13,28 +14,23 @@ export type Stats = {
 type FightAdditionProps = {
   question: string;
   answer: number;
-  onNext: (exp: number, coins: number, statGain: Partial<Stats>) => void;
-  monsterImgSrc: string;
-  hearts: number;
-  setHearts: React.Dispatch<React.SetStateAction<number>>;
-  onWin: () => void;
-  onLose: () => void;
+  onNext: ({ earnedExp, earnedCoins, earnedStats }: {
+    earnedExp: number;
+    earnedCoins: number;
+    earnedStats: Partial<Stats>;
+  }) => void;
 };
 
-export default function FightAddition({
+export default function LearnAddition({
   question,
   answer,
   onNext,
-  monsterImgSrc,
-  hearts,
-  setHearts,
-  onWin,
-  onLose,
 }: FightAdditionProps) {
   const [input, setInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [showHitEffect, setShowHitEffect] = useState(false);
+  const [showEnergyBall, setShowEnergyBall] = useState(false);
 
   const handleButtonClick = (value: string) => {
     if (!isCorrect && !gameOver) {
@@ -48,42 +44,30 @@ export default function FightAddition({
     }
   };
 
-  useEffect(() => {
-    if (hearts <= 0 && !gameOver) {
-      setGameOver(true);
-      setTimeout(() => {
-        onLose(); // Call onLose when the game is over due to no hearts
-        onNext(0, 0, {});
-      }, 1000);
-    }
-  }, [hearts, gameOver, onLose, onNext]);
-
-  const handleSubmit = () => {
-    if (parseInt(input) === answer) {
-      setIsCorrect(true);
-      setTimeout(() => {
-        onWin(); // Call onWin when the answer is correct
-        onNext(100, 150, { math: 5 });
-      }, 1000);
-    } else {
-      setHearts((prev) => prev - 1);
-      setInput("");
-      setShowHitEffect(true);
-    }
+  const handleAnimationComplete = () => {
+    const postAnimationDelay = 200;
+    setTimeout(() => {
+        setShowEnergyBall(false); 
+        onNext({ earnedExp: 10, earnedCoins: 5, earnedStats: { math: 1 } }); 
+    }, postAnimationDelay)
   };
 
-  const renderHearts = () => (
-    <div className="flex absolute right-15 space-x-3 mb-2 mt-1">
-      {Array.from({ length: 3 }).map((_, i) => (
-        <i
-          key={i}
-          className={`nes-icon is-medium ${
-            i < hearts ? "heart" : "heart is-empty"
-          }`}
-        ></i>
-      ))}
-    </div>
-  );
+
+  const handleSubmit = () => {
+    // Prevent submission if already correct or game over
+    if (isCorrect || gameOver) return;
+
+    if (parseInt(input) === answer) {
+      setIsCorrect(true);
+      // Simply trigger the state that causes the motion component to render
+      setShowEnergyBall(true);
+      // No manual setTimeout needed here to trigger onNext,
+      // handleAnimationComplete will do it.
+    } else {
+      setInput("");
+      setShowHitEffect(true); // Trigger hit effect on incorrect answer
+    }
+  };
 
   return (
     <div
@@ -93,35 +77,52 @@ export default function FightAddition({
         backgroundSize: "250% 175%",
       }}
     >
-      <HitEffect
-        trigger={showHitEffect}
-        onEnd={() => setShowHitEffect(false)}
-      />
+      {/* Hit Effect Overlay */}
+      <HitEffect trigger={showHitEffect} onEnd={() => setShowHitEffect(false)} />
+
       {/* 🟡 Top Status */}
-      <div className="mt-4 mb-2 text-center h-8 z-50">
-        {isCorrect && (
+      <div className="mt-4 mb-2 text-center h-8">
+        {isCorrect && !showEnergyBall && (
           <p className="text-[#fff275] font-bold text-xl animate-bounce">
-            Monster Defeated!
+            That's correct!
           </p>
         )}
         {gameOver && (
           <p className="text-red-400 font-bold text-xl">💀 Game Over 💀</p>
         )}
       </div>
-      {renderHearts()}
-      {/* ❓ Question + ❤️ Hearts */}
-      <div className="bg-[#e5d9c4] nes-container is-rounded  px-4 py-0 shadow-md max-w-md text-center">
+
+      {/* Question Box */}
+      <div className="bg-[#e5d9c4] nes-container is-rounded px-4 py-0 shadow-md max-w-md text-center mb-4">
         <span className="text-black font-bold text-2xl leading-none inline-block mt-2 mb-2">
           {question}
         </span>
       </div>
 
-      {/* 👾 Monster */}
-      <img
-        src={monsterImgSrc}
-        alt="monster"
-        className="w-64 h-64 object-contain mb-2"
-      />
+      <div className="relative mb-4 w-64 h-64"> 
+        <img
+          src="/assets/effects/target.png"
+          alt="target"
+          className="w-full h-full object-contain" 
+        />
+
+
+        <AnimatePresence>
+          {showEnergyBall && (
+            <motion.img
+              key="energy-ball"
+              src="/assets/effects/energy_ball.webp"
+              alt="energy ball"
+              className="absolute w-24 h-24"
+              style={{ top: "-20%", right: "-20%" }}
+              initial={{ x: "0%", y: "0%", scale: 0.3, opacity: 0.5 }}
+              animate={{ x: "-100%", y: "100%", scale: 1, opacity: 1 }} 
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              onAnimationComplete={handleAnimationComplete} 
+            />
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* 📦 Battle Box UI */}
       <div className="bg-[#e5d9c4] border-4 border-[#000000] rounded-xl p-4 shadow-xl w-full max-w-md">
@@ -146,7 +147,6 @@ export default function FightAddition({
               {num}
             </button>
           ))}
-
           <button
             onClick={() => handleButtonClick("0")}
             className="nes-btn is-dark"
@@ -154,19 +154,17 @@ export default function FightAddition({
           >
             0
           </button>
-
           <button
             onClick={handleClear}
             className="nes-btn is-error"
-            disabled={gameOver || isCorrect}
+            disabled={gameOver || isCorrect || input.length === 0}
           >
             CLR
           </button>
-
           <button
             onClick={handleSubmit}
             className="nes-btn is-success"
-            disabled={gameOver || isCorrect}
+            disabled={gameOver || isCorrect || input.length === 0}
           >
             ✓
           </button>
