@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BossAddition from "@/app/components/BossAddition";
 import ExpGained from "@/app/components/expGained";
 
@@ -25,51 +25,68 @@ export default function Battle() {
   const [hearts, setHearts] = useState(3);
   const [bossHealth, setBossHealth] = useState(100);
   const [battleDone, setBattleDone] = useState(false);
+  const [isWon, setIsWon] = useState(false);
 
   const [expGain, setExpGain] = useState(0);
   const [coinsGain, setCoinsGain] = useState(0);
   const [statGain, setStatGain] = useState<Partial<Stats>>({});
-
 
   const handleNext = (
     earnedExp: number,
     earnedCoins: number,
     earnedStats: Partial<Stats>
   ) => {
-    const newHealth = bossHealth - 25;
+    const newHealth = Math.max(bossHealth - 25, 0);
     setBossHealth(newHealth);
 
     const isDead = newHealth <= 0;
-    const isLastQuestion = current >= questions.length - 1;
+    const isLast = current >= questions.length - 1;
+    const playerWon = isDead && !isLast && hearts > 0;
 
-    if (isDead || hearts <= 0 || isLastQuestion) {
-      setExpGain(isDead ? earnedExp : 0);
-      setCoinsGain(isDead ? earnedCoins : 0);
-      setStatGain(isDead ? earnedStats : {});
+    if (isDead || isLast || hearts <= 0) {
+      setIsWon(playerWon);
+      setExpGain(playerWon ? earnedExp : 0);
+      setCoinsGain(playerWon ? earnedCoins : 0);
+      setStatGain(playerWon ? earnedStats : {});
       setBattleDone(true);
     } else {
       setCurrent((prev) => prev + 1);
     }
   };
 
+  useEffect(() => {
+    if (hearts <= 0 && !battleDone) {
+      // player died → lose
+      setIsWon(false);
+      setBattleDone(true);
+    }
+  }, [hearts, battleDone]);
+
   if (battleDone) {
-    return <ExpGained Exp={expGain} Coins={coinsGain} statGain={statGain} isWon={false} />;
+    return (
+      <ExpGained
+        isWon={isWon}
+        Exp={expGain}
+        Coins={coinsGain}
+        statGain={statGain}
+      />
+    );
   }
 
   const currentQuestion = questions[current];
 
   return (
     <BossAddition
-    key={current}
-    question={currentQuestion.question}
-    answer={currentQuestion.answer}
-    monsterImgSrc="/assets/monsters/final_math_boss.png"
-    onNext={handleNext}
-    hearts={hearts}
-    setHearts={setHearts}
-    bossHealth={bossHealth}
-    onWin={() => console.log("WIN 🎉")}
-    onLose={() => console.log("LOSE 💀")}
+      key={current}
+      question={currentQuestion.question}
+      answer={currentQuestion.answer}
+      monsterImgSrc="/assets/monsters/final_math_boss.png"
+      onNext={handleNext}
+      hearts={hearts}
+      setHearts={setHearts}
+      bossHealth={bossHealth}
+      onWin={() => setIsWon(true)}
+      onLose={() => setIsWon(false)}
     />
   );
 }
