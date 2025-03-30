@@ -17,6 +17,8 @@ type FightAdditionProps = {
   monsterImgSrc: string;
   hearts: number;
   setHearts: React.Dispatch<React.SetStateAction<number>>;
+  onWin: () => void;
+  onLose: () => void;
 };
 
 export default function FightAddition({
@@ -26,6 +28,8 @@ export default function FightAddition({
   monsterImgSrc,
   hearts,
   setHearts,
+  onWin,
+  onLose,
 }: FightAdditionProps) {
   const [input, setInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
@@ -48,15 +52,17 @@ export default function FightAddition({
     if (hearts <= 0 && !gameOver) {
       setGameOver(true);
       setTimeout(() => {
+        onLose(); // Call onLose when the game is over due to no hearts
         onNext(0, 0, {});
       }, 1000);
     }
-  }, [hearts, gameOver, onNext]);
+  }, [hearts, gameOver, onLose, onNext]);
 
   const handleSubmit = () => {
     if (parseInt(input) === answer) {
       setIsCorrect(true);
       setTimeout(() => {
+        onWin(); // Call onWin when the answer is correct
         onNext(100, 150, { math: 5 });
       }, 1000);
     } else {
