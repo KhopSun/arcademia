@@ -30,6 +30,7 @@ export default function Battle() {
   const [coinsGain, setCoinsGain] = useState(0);
   const [statGain, setStatGain] = useState<Partial<Stats>>({});
 
+
   const handleNext = (
     earnedExp: number,
     earnedCoins: number,
@@ -52,21 +53,23 @@ export default function Battle() {
   };
 
   if (battleDone) {
-    return <ExpGained Exp={expGain} Coins={coinsGain} statGain={statGain} />;
+    return <ExpGained Exp={expGain} Coins={coinsGain} statGain={statGain} isWon={false} />;
   }
 
   const currentQuestion = questions[current];
 
   return (
     <BossAddition
-      key={current}
-      question={currentQuestion.question}
-      answer={currentQuestion.answer}
-      monsterImgSrc="/assets/monsters/monster1.png"
-      onNext={handleNext}
-      hearts={hearts}
-      setHearts={setHearts}
-      bossHealth={bossHealth}
+    key={current}
+    question={currentQuestion.question}
+    answer={currentQuestion.answer}
+    monsterImgSrc="/assets/monsters/final_math_boss.png"
+    onNext={handleNext}
+    hearts={hearts}
+    setHearts={setHearts}
+    bossHealth={bossHealth}
+    onWin={() => console.log("WIN 🎉")}
+    onLose={() => console.log("LOSE 💀")}
     />
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import HitEffect from "./HitEffect";
 
 export type Stats = {
   science: number;
@@ -17,6 +18,8 @@ type BossAdditionProps = {
   hearts: number;
   setHearts: React.Dispatch<React.SetStateAction<number>>;
   bossHealth: number;
+  onWin: () => void;
+  onLose: () => void;
 };
 
 export default function BossAddition({
@@ -27,19 +30,23 @@ export default function BossAddition({
   hearts,
   setHearts,
   bossHealth,
+  onWin,
+  onLose,
 }: BossAdditionProps) {
   const [input, setInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [showHitEffect, setShowHitEffect] = useState(false);
 
   useEffect(() => {
     if (hearts <= 0 && !gameOver) {
       setGameOver(true);
       setTimeout(() => {
+        onLose();
         onNext(0, 0, {});
       }, 1000);
     }
-  }, [hearts, gameOver, onNext]);
+  }, [hearts, gameOver, onLose, onNext]);
 
   const handleButtonClick = (value: string) => {
     if (!isCorrect && !gameOver) {
@@ -57,6 +64,7 @@ export default function BossAddition({
     if (parseInt(input) === answer) {
       setIsCorrect(true);
       setTimeout(() => {
+        onWin();
         onNext(100, 150, { math: 5 });
         setIsCorrect(false);
         setInput("");
@@ -64,6 +72,7 @@ export default function BossAddition({
     } else {
       setHearts((prev) => prev - 1);
       setInput("");
+      setShowHitEffect(true);
     }
   };
 
@@ -88,11 +97,13 @@ export default function BossAddition({
         backgroundSize: "250% 175%",
       }}
     >
+      <HitEffect trigger={showHitEffect} onEnd={() => setShowHitEffect(false)} />
+
       {/* 🟡 Top Status */}
       <div className="mt-4 mb-2 text-center h-8 z-50">
         {isCorrect && (
           <p className="text-[#fff275] font-bold text-xl animate-bounce">
-            Hit!
+            Monster Defeated!
           </p>
         )}
         {gameOver && (
@@ -104,7 +115,7 @@ export default function BossAddition({
 
       {/* ❓ Question Box */}
       <div className="bg-[#e5d9c4] nes-container is-rounded px-4 py-0 shadow-md max-w-md text-center">
-        <span className="text-black font-bold text-2xl leading-none inline-block mb-2">
+        <span className="text-black font-bold text-2xl leading-none inline-block mt-2">
           {question}
         </span>
       </div>
@@ -115,7 +126,7 @@ export default function BossAddition({
           className="nes-progress is-error"
           value={bossHealth}
           max="100"
-          style={{ height: "2px" }}
+          style={{ height: "20px" }}
         ></progress>
       </div>
 
@@ -123,12 +134,11 @@ export default function BossAddition({
       <img
         src={monsterImgSrc}
         alt="monster"
-        className="w-64 h-55 object-contain"
+        className="w-64 h-50 object-contain mb-2"
       />
 
       {/* 📦 Battle Box UI */}
       <div className="bg-[#e5d9c4] border-4 border-[#000000] rounded-xl p-4 shadow-xl w-full max-w-md">
-        {/* 🧠 Input */}
         <input
           type="text"
           readOnly
@@ -137,7 +147,6 @@ export default function BossAddition({
           placeholder="Your answer"
         />
 
-        {/* 🔢 Numpad */}
         <div className="grid grid-cols-3 gap-3 mt-4">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
