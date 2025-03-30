@@ -5,6 +5,7 @@ export interface Lesson {
   status: "locked" | "unlocked" | "completed" | "current";
   boss?: string;
   icon?: React.ReactNode;
+  path: string;
 }
 
 export const lessonsData: Lesson[] = [
@@ -14,6 +15,7 @@ export const lessonsData: Lesson[] = [
     title: "Lesson",
     status: "completed",
     boss: "monster1",
+    path: "/quest",
   },
   {
     type: "fight",
@@ -21,6 +23,7 @@ export const lessonsData: Lesson[] = [
     title: "Fight",
     status: "current",
     boss: "final_math_boss",
+    path: "/fight",
   },
   {
     type: "boss",
@@ -28,5 +31,6 @@ export const lessonsData: Lesson[] = [
     title: "Boss Fight",
     status: "locked",
     boss: "final_math_boss",
+    path: "/quest",
   },
 ];

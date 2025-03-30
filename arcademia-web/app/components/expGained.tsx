@@ -31,7 +31,7 @@ export default function ExpGained({
     if (!added) {
       setPreviousExp(exp);
       setPreviousCoins(coins);
-      setPreviousStats(stats);
+      setPreviousStats({ ...stats }); // ✅ Take a snapshot before updating
 
       setExp(exp + Exp);
       setCoins(coins + Coins);
@@ -40,7 +40,7 @@ export default function ExpGained({
         ...Object.fromEntries(
           Object.entries(statGain).map(([key, val]) => [
             key,
-            prev[key as keyof Stats] + (val || 0),
+            (prev[key as keyof Stats] || 0) + (val || 0),
           ])
         ),
       }));
