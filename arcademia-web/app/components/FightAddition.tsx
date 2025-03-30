@@ -55,7 +55,7 @@ export default function FightAddition({
     if (parseInt(input) === answer) {
       setIsCorrect(true);
       setTimeout(() => {
-        onNext(100, 150, { math: 10 });
+        onNext(100, 150, { math: 5 });
       }, 1000);
     } else {
       setHearts((prev) => prev - 1);
