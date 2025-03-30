@@ -120,7 +120,7 @@ export default function FightAddition({
       <img
         src={monsterImgSrc}
         alt="monster"
-        className="w-64 h-64 object-contain mb-2"
+        className="w-64 h-58 object-contain mb-2"
       />
 
       {/* 📦 Battle Box UI */}
