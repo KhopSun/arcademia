@@ -9,9 +9,15 @@ interface LessonNodeProps {
   lesson: Lesson;
   isFirst: boolean;
   isLast: boolean;
+  onComplete?: (lessonId: number) => void; // ✅ add this
 }
 
-const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
+const LessonNode: React.FC<LessonNodeProps> = ({
+  lesson,
+  isFirst,
+  isLast,
+  onComplete,
+}) => {
   const router = useRouter(); // ✅ Initialize router
   const getStatusStyles = (): string => {
     switch (lesson.status) {
@@ -49,8 +55,8 @@ const LessonNode: React.FC<LessonNodeProps> = ({ lesson, isFirst, isLast }) => {
 
   const handleClick = () => {
     if (lesson.status === "unlocked" || lesson.status === "current") {
-      // alert(`Starting: ${lesson.title}`);
-      router.push(lesson.path); // ✅ Redirect to the lesson's path
+      onComplete?.(lesson.id); // ✅ mark lesson completed
+      router.push(lesson.path); // ✅ route to lesson path
     }
   };
 
