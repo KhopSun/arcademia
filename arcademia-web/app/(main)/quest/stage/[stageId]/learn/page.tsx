@@ -58,7 +58,7 @@ export default function Battle() {
   };
 
   if (battleDone) {
-    return <ExpGained Exp={expGain} Coins={coinsGain} statGain={statGain} />;
+    return <ExpGained isWon={true} Exp={expGain} Coins={coinsGain} statGain={statGain} />;
   }
 
   const currentMonster = questions[current];
