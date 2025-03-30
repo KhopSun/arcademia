@@ -91,13 +91,16 @@ export default function BossAddition({
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-start bg-no-repeat bg-center bg-cover p-6"
+      className="min-h-screen z-[-2] flex flex-col items-center justify-start bg-no-repeat bg-center bg-cover p-6"
       style={{
         backgroundImage: "url('/assets/background/fight/Autumn2.png')",
         backgroundSize: "250% 175%",
       }}
     >
-      <HitEffect trigger={showHitEffect} onEnd={() => setShowHitEffect(false)} />
+      <HitEffect
+        trigger={showHitEffect}
+        onEnd={() => setShowHitEffect(false)}
+      />
 
       {/* 🟡 Top Status */}
       <div className="mt-4 mb-2 text-center h-8 z-50">
@@ -114,14 +117,14 @@ export default function BossAddition({
       {renderHearts()}
 
       {/* ❓ Question Box */}
-      <div className="bg-[#e5d9c4] nes-container is-rounded px-4 py-0 shadow-md max-w-md text-center">
+      <div className="bg-[#e5d9c4] z-20 nes-container is-rounded px-4 py-0 shadow-md max-w-md text-center">
         <span className="text-black font-bold text-2xl leading-none inline-block mt-2">
           {question}
         </span>
       </div>
 
       {/* ❤️ Health Bar */}
-      <div className="w-full max-w-xs mt-2">
+      <div className="w-full z-20 max-w-xs mt-2">
         <progress
           className="nes-progress is-warning"
           value={bossHealth}
@@ -134,11 +137,12 @@ export default function BossAddition({
       <img
         src={monsterImgSrc}
         alt="monster"
-        className="w-64 h-50 object-contain mb-2"
+        className="absolute w-full z-[10] top-20 object-contain mb-2"
       />
+      <div className="w-64 h-50 object-contain mb-2"></div>
 
       {/* 📦 Battle Box UI */}
-      <div className="bg-[#e5d9c4] border-4 border-[#000000] rounded-xl p-4 shadow-xl w-full max-w-md">
+      <div className="bg-[#e5d9c4] z-20 border-4 border-[#000000] rounded-xl p-4 shadow-xl w-full max-w-md">
         <input
           type="text"
           readOnly
