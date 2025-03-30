@@ -41,8 +41,8 @@ const QuestPage: React.FC = () => {
     <div
       className="flex flex-col items-center justify-center min-h-screen gap-12 p-8 sm:p-12 bg-no-repeat bg-center"
       style={{
-        backgroundImage: "url('/assets/background/Journey3.webp')",
-        backgroundSize: "400%",
+        backgroundImage: "url('/assets/background/quest_background.png')",
+        backgroundSize: "130%",
       }}
     >
       {lessons.map((lesson, index) => (
