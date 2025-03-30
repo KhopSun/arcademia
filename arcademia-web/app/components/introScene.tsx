@@ -27,9 +27,9 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
               className="absolute w-full h-full object-cover"
             />
             <TextBubble
-              text="It was a land where math shaped magic, science powered cities, language gave life to spells, and code held 
+              text="Long ago, the world of Arcanova shimmered with knowledge.\nIt was a land where math shaped magic, science powered cities, language gave life to spells, and code held 
 the world together behind the scenes.
- The four great kingdoms—Numeria, Scientia, Lingua, and Technos—guarded the sacred Crystal Codex, the 
+The four great kingdoms—Numeria, Scientia, Lingua, and Technos—guarded the sacred Crystal Codex, the 
 source of all learning."
               onNext={nextStep}
             />
@@ -61,8 +61,8 @@ source of all learning."
           <TextBubble
             text={
               <>
-                <strong>Oblivor:</strong> Jealous of the world’s harmony and
-                hungry for control, he unleashed the Great Forgetting — a
+                Jealous of the world’s harmony and
+                hungry for control, the dark lord <strong>Oblivor</strong> rose from the shadows, he unleashed the Great Forgetting — a
                 catastrophic spell that shattered the Crystal Codex and erased
                 knowledge itself. <br />
                 Numbers vanished. Equations dissolved. Language broke apart.
