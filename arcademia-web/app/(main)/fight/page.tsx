@@ -30,20 +30,24 @@ export type Stats = {
 };
 
 export default function Battle() {
-  const [current, setCurrent] = useState(0);
-  const [hearts, setHearts] = useState(3);
-  const [battleDone, setBattleDone] = useState(false);
+  const [current, setCurrent] = useState<number>(0);
+  const [hearts, setHearts] = useState<number>(3);
+  const [battleDone, setBattleDone] = useState<boolean>(false);
 
-  // Rewards after last fight
-  const [expGain, setExpGain] = useState(0);
-  const [coinsGain, setCoinsGain] = useState(0);
+  // Rewards after the last fight
+  const [expGain, setExpGain] = useState<number>(0);
+  const [coinsGain, setCoinsGain] = useState<number>(0);
   const [statGain, setStatGain] = useState<Partial<Stats>>({});
 
-  const handleNext = (
-    earnedExp: number,
-    earnedCoins: number,
-    earnedStats: Partial<Stats>
-  ) => {
+  const handleNext = ({
+    earnedExp,
+    earnedCoins,
+    earnedStats,
+  }: {
+    earnedExp: number;
+    earnedCoins: number;
+    earnedStats: Partial<Stats>;
+  }) => {
     const isLast = current >= monsters.length - 1;
     const isDead = hearts <= 0;
 

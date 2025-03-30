@@ -3,10 +3,21 @@
 import React, { useState } from "react";
 import HitEffect from "./HitEffect"; // Import the new component
 
+type Stats = {
+  science: number;
+  code: number;
+  math: number;
+  english: number;
+};
+
 type FightAdditionProps = {
   question: string;
   answer: number;
-  onNext: () => void;
+  onNext: ({ earnedExp, earnedCoins, earnedStats }: {
+    earnedExp: number;
+    earnedCoins: number;
+    earnedStats: Partial<Stats>;
+  }) => void;
   monsterImgSrc: string;
   hearts: number;
   setHearts: React.Dispatch<React.SetStateAction<number>>;
