@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import HitEffect from "./HitEffect"; // Import the hit effect component
-import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
+import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
+import TextBubble from "./textBubble";
 
 type Stats = {
   science: number;
@@ -14,7 +15,11 @@ type Stats = {
 type FightAdditionProps = {
   question: string;
   answer: number;
-  onNext: ({ earnedExp, earnedCoins, earnedStats }: {
+  onNext: ({
+    earnedExp,
+    earnedCoins,
+    earnedStats,
+  }: {
     earnedExp: number;
     earnedCoins: number;
     earnedStats: Partial<Stats>;
@@ -32,6 +37,8 @@ export default function LearnAddition({
   const [showHitEffect, setShowHitEffect] = useState(false);
   const [showEnergyBall, setShowEnergyBall] = useState(false);
 
+  const [showText, setShowText] = useState(true);
+
   const handleButtonClick = (value: string) => {
     if (!isCorrect && !gameOver) {
       setInput((prev) => prev + value);
@@ -47,11 +54,10 @@ export default function LearnAddition({
   const handleAnimationComplete = () => {
     const postAnimationDelay = 200;
     setTimeout(() => {
-        setShowEnergyBall(false); 
-        onNext({ earnedExp: 10, earnedCoins: 5, earnedStats: { math: 1 } }); 
-    }, postAnimationDelay)
+      setShowEnergyBall(false);
+      onNext({ earnedExp: 10, earnedCoins: 5, earnedStats: { math: 1 } });
+    }, postAnimationDelay);
   };
-
 
   const handleSubmit = () => {
     // Prevent submission if already correct or game over
@@ -78,7 +84,10 @@ export default function LearnAddition({
       }}
     >
       {/* Hit Effect Overlay */}
-      <HitEffect trigger={showHitEffect} onEnd={() => setShowHitEffect(false)} />
+      <HitEffect
+        trigger={showHitEffect}
+        onEnd={() => setShowHitEffect(false)}
+      />
 
       {/* 🟡 Top Status */}
       <div className="mt-4 mb-2 text-center h-8">
@@ -98,14 +107,50 @@ export default function LearnAddition({
           {question}
         </span>
       </div>
+      {showText && (
+        <React.Fragment>
+          <img
+            src="/assets/teachers/head_professor.png"
+            alt="Professor"
+            className="absolute top-1/6 right-0 z-20 w-32"
+          />
 
-      <div className="relative w-64 h-64"> 
+          <div className="absolute top-1/6 left-1 z-20 w-64">
+            <TextBubble
+              text={
+                <>
+                  <strong className="text-xs">Archmage Calculio: </strong>
+                  <br />
+                  Addition is like gathering magic energy. When you add two
+                  numbers, you are combining their power into a greater force.
+                  <br />
+                  Imagine you have 3 mana crystals and find 5 more. How many do
+                  you have now?
+                  <br />
+                  Try counting up from the first number. Start with 3, then add
+                  5 one at a time!
+                <div className="flex justify-between mt-2">
+                    <div></div>
+                    <button className=" nes-btn !p-0" >Skip</button>
+                </div>
+
+                 
+                </>
+              }
+              onNext={() => {
+                setShowText(false);
+              }}
+            />
+          </div>
+        </React.Fragment>
+      )}
+
+      <div className="relative w-64 h-64">
         <img
           src="/assets/effects/target.png"
           alt="target"
-          className="w-full h-full object-contain" 
+          className="w-full h-full object-contain"
         />
-
 
         <AnimatePresence>
           {showEnergyBall && (
@@ -116,9 +161,9 @@ export default function LearnAddition({
               className="absolute w-24 h-24"
               style={{ top: "-20%", right: "-20%" }}
               initial={{ x: "0%", y: "0%", scale: 0.3, opacity: 0.5 }}
-              animate={{ x: "-100%", y: "100%", scale: 1, opacity: 1 }} 
+              animate={{ x: "-100%", y: "100%", scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              onAnimationComplete={handleAnimationComplete} 
+              onAnimationComplete={handleAnimationComplete}
             />
           )}
         </AnimatePresence>
