@@ -4,14 +4,6 @@ import "./globals.css";
 import BottomNavBar from "./components/BottomNavBar";
 import "nes.css/css/nes.min.css";
 
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,7 +32,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
       <html lang="en">
         <body
           className={`${pressStart2P.className} ${geistMono.variable} antialiased`}
@@ -58,6 +49,5 @@ export default function RootLayout({
           <BottomNavBar/>
         </body>
       </html>
-    </ClerkProvider>
   );
 }
