@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import HitEffect from "./HitEffect";
 
 export type Stats = {
   science: number;
@@ -29,6 +30,7 @@ export default function FightAddition({
   const [input, setInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [showHitEffect, setShowHitEffect] = useState(false);
 
   const handleButtonClick = (value: string) => {
     if (!isCorrect && !gameOver) {
@@ -60,6 +62,7 @@ export default function FightAddition({
     } else {
       setHearts((prev) => prev - 1);
       setInput("");
+      setShowHitEffect(true);
     }
   };
 
@@ -84,6 +87,7 @@ export default function FightAddition({
         backgroundSize: "250% 175%",
       }}
     >
+      <HitEffect trigger={showHitEffect} onEnd={() => setShowHitEffect(false)} />
       {/* 🟡 Top Status */}
       <div className="mt-4 mb-2 text-center h-8 z-50">
         {isCorrect && (
