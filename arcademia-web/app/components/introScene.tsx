@@ -27,10 +27,15 @@ export default function IntroScene({ onComplete }: IntroSceneProps) {
               className="absolute w-full h-full object-cover"
             />
             <TextBubble
-              text="Long ago, the world of Arcanova shimmered with knowledge.\nIt was a land where math shaped magic, science powered cities, language gave life to spells, and code held 
-the world together behind the scenes.
-The four great kingdoms—Numeria, Scientia, Lingua, and Technos—guarded the sacred Crystal Codex, the 
-source of all learning."
+              text={
+                <>
+                  Long ago, Arcanova shimmered with knowledge. Math shaped
+                  magic, science powered cities, language gave life to spells,
+                  and code held the world together. The four great
+                  kingdoms—Numeria, Scientia, Lingua, and Technos—guarded the
+                  sacred Crystal Codex, the source of all learning
+                </>
+              }
               onNext={nextStep}
             />
           </>
@@ -61,12 +66,12 @@ source of all learning."
           <TextBubble
             text={
               <>
-                Jealous of the world’s harmony and
-                hungry for control, the dark lord <strong>Oblivor</strong> rose from the shadows, he unleashed the Great Forgetting — a
-                catastrophic spell that shattered the Crystal Codex and erased
-                knowledge itself. <br />
-                Numbers vanished. Equations dissolved. Language broke apart.
-                Code began to glitch and corrupt reality.
+                Jealous of the world's harmony and hungry for control, the dark
+                lord <strong className="text-red-500">Oblivor</strong> rose from the shadows and
+                unleashed the Great Forgetting — a spell that shattered the
+                Crystal Codex and erased all knowledge. Numbers vanished,
+                equations dissolved, and code began to glitch, corrupting
+                reality itself.
               </>
             }
             onNext={nextStep}
@@ -87,17 +92,11 @@ source of all learning."
           <TextBubble
             text={
               <>
-                People forgot how to read. How to count. How to speak clearly or
-                invent anything at all.
-                <br />
-                The world fell into chaos. The four kingdoms crumbled.
-                <br />
-                And the Masters of Knowledge—guardians of each subject—was
-                sealed away.
-                <br />
-                <br />
-                Now, <strong>Arcanova</strong> is a fractured world, drowning in
-                confusion and fear.
+                People forgot how to read, count, or speak clearly. The world
+                fell into chaos as the four kingdoms crumbled, and the Masters
+                of Knowledge—guardians of each subject—were sealed away.
+                <br /> Now, <strong>Arcanova</strong> is a fractured world,
+                drowning in confusion and fear.
               </>
             }
             onNext={nextStep}
